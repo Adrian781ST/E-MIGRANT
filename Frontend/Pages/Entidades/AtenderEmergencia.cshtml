@@ -1,5 +1,6 @@
-﻿@page
-@model Frontend.Pages.Migrantes.AtenderEmergenciaModel
+@page
+@attribute [Authorize(Roles = "Entidad")]
+@model Frontend.Pages.Entidades.AtenderEmergenciaModel
 @{
     ViewData["Title"] = "Confirmar Atención";
 }
@@ -29,6 +30,7 @@
                 {
                     <div class="alert alert-info mb-4">
                         <p class="mb-0"><strong>Emergencia:</strong> @Model._emergencia.Descripcion</p>
+                        <p class="mb-0"><strong>Migrante ID:</strong> @Model._emergencia.MigranteId</p>
                         <p class="mb-0"><strong>Estado:</strong> <span class="badge bg-warning">@Model._emergencia.Status</span></p>
                     </div>
                     
@@ -46,10 +48,10 @@
                         
                         <div class="d-grid gap-2">
                             <button type="submit" class="btn btn-success btn-lg">
-                                <i class="fas fa-check me-2"></i>Sí, estoy seguro
+                                <i class="fas fa-check me-2"></i>Sí, atender emergencia
                             </button>
                             <a asp-page="Emergencias" class="btn btn-outline-secondary btn-lg">
-                                <i class="fas fa-times me-2"></i>No estoy seguro
+                                <i class="fas fa-arrow-left me-2"></i>Volver
                             </a>
                         </div>
                     </form>

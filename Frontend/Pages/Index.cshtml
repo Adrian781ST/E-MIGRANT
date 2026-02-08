@@ -1,10 +1,164 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "E-Migrant - Inicio";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Bienvenido</h1>
-    <p>Sistema de Migrantes</p>
-</div>
+@if (SignInManager.IsSignedIn(User))
+{
+    <!-- Dashboard for logged in users -->
+    <div class="p-4 p-md-5 mb-4 bg-light rounded-3 border">
+        <div class="container-fluid py-4 py-md-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8 order-2 order-lg-1">
+                    <h1 class="display-5 fw-bold text-primary">Bienvenido de nuevo, @User.Identity.Name!</h1>
+                    <p class="col-md-10 fs-4 text-muted">
+                        Accede a tu panel de control para gestionar tu información y servicios.
+                    </p>
+                    <div class="mt-4 d-grid d-md-inline-flex gap-2">
+                        <a href="/Migrantes/Index" class="btn btn-primary btn-lg">
+                            <i class="fas fa-tachometer-alt me-2"></i>Panel de Control
+                        </a>
+                        <a href="/VerEntidades" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-building me-2"></i>Ver Entidades
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center order-1 order-lg-2 mb-4 mb-lg-0">
+                    <i class="fas fa-hand-holding-heart text-primary" style="font-size: 6rem; font-size: 8rem;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quick Access Cards -->
+    <div class="row align-items-md-stretch">
+        <div class="col-md-4 mb-4">
+            <div class="h-100 p-5 bg-white border rounded-3 shadow-sm">
+                <div class="text-primary mb-3">
+                    <i class="fas fa-first-aid fa-3x"></i>
+                </div>
+                <h2>Emergencias</h2>
+                <p class="text-muted">
+                    Accede rápidamente a información de emergencias y contactos de ayuda humanitária.
+                </p>
+                <a href="/Migrantes/Emergencias" class="btn btn-outline-primary" type="button">Ir a Emergencias</a>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="h-100 p-5 bg-white border rounded-3 shadow-sm">
+                <div class="text-success mb-3">
+                    <i class="fas fa-building fa-3x"></i>
+                </div>
+                <h2>Entidades</h2>
+                <p class="text-muted">
+                    Descubre las entidades públicas y privadas que ofrecen servicios para migrantes.
+                </p>
+                <a href="/VerEntidades" class="btn btn-outline-success" type="button">Ver Entidades</a>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="h-100 p-5 bg-white border rounded-3 shadow-sm">
+                <div class="text-warning mb-3">
+                    <i class="fas fa-star fa-3x"></i>
+                </div>
+                <h2>Calificación</h2>
+                <p class="text-muted">
+                    Evalúa los servicios recibidos y ayúdanos a mejorar la atención.
+                </p>
+                <a href="/Migrantes/Evaluanos" class="btn btn-outline-warning" type="button">Evaluar Servicios</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <!-- Hero Section for non-logged in users -->
+    <div class="p-4 p-md-5 mb-4 bg-light rounded-3 border">
+        <div class="container-fluid py-4 py-md-5">
+            <div class="row align-items-center">
+                <div class="col-lg-8 order-2 order-lg-1">
+                    <h1 class="display-5 fw-bold text-primary">Bienvenido a E-Migrant</h1>
+                    <p class="col-md-10 fs-4 text-muted">
+                        La plataforma integral de apoyo para migrantes en Colombia. 
+                        Aquí encontrarás información sobre servicios, emergencias, y cómo acceder a la ayuda que necesitas.
+                    </p>
+                    <div class="mt-4 d-grid d-md-inline-flex gap-2">
+                        <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-primary btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>Registrarse
+                        </a>
+                        <a asp-area="Identity" asp-page="/Account/Login" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-sign-in-alt me-2"></i>Iniciar Sesión
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 text-center order-1 order-lg-2 mb-4 mb-lg-0">
+                    <i class="fas fa-hand-holding-heart text-primary" style="font-size: 6rem; font-size: 8rem;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="row align-items-md-stretch">
+        <div class="col-md-4 mb-4">
+            <div class="h-100 p-5 bg-white border rounded-3 shadow-sm">
+                <div class="text-primary mb-3">
+                    <i class="fas fa-first-aid fa-3x"></i>
+                </div>
+                <h2>Emergencias</h2>
+                <p class="text-muted">
+                    Accede rápidamente a información de emergencias ycontactos de ayuda humanitária.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="h-100 p-5 bg-white border rounded-3 shadow-sm">
+                <div class="text-success mb-3">
+                    <i class="fas fa-building fa-3x"></i>
+                </div>
+                <h2>Entidades</h2>
+                <p class="text-muted">
+                    Descubre las entidades públicas y privadas que ofrecen servicios para migrantes.
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="h-100 p-5 bg-white border rounded-3 shadow-sm">
+                <div class="text-warning mb-3">
+                    <i class="fas fa-star fa-3x"></i>
+                </div>
+                <h2>Calificación</h2>
+                <p class="text-muted">
+                    Evalúa los servicios recibidos y ayúdanos a mejorar la atención.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Section -->
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="card border-0 bg-primary text-white">
+                <div class="card-body p-5">
+                    <div class="row align-items-center">
+                        <div class="col-lg-8">
+                            <h3 class="card-title fw-bold">¿Eres una entidad que desea registrarse?</h3>
+                            <p class="card-text">
+                                Regístrate como entidad para ofrecer tus servicios a la comunidad migrante.
+                            </p>
+                        </div>
+                        <div class="col-lg-4 text-lg-end">
+                            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-light btn-lg">
+                                <i class="fas fa-building me-2"></i>Registrar Entidad
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

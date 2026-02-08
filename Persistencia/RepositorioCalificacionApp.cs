@@ -1,5 +1,6 @@
 using Dominio;
 using System.Linq;
+using System.Collections.Generic;
 using Persistencia;
 
 
@@ -13,6 +14,11 @@ namespace Persistencia{
             var CalificacionAdicionada= _appContext.CalificacionApp.Add(calificacionApp);
             _appContext.SaveChanges();
            return CalificacionAdicionada.Entity;
+        }
+
+        public IEnumerable<CalificacionApp> ListarCalificaciones()
+        {
+            return _appContext.CalificacionApp.ToList();
         }
     }
 }

@@ -1,15 +1,21 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Dominio
 {
 
     public enum ValorCalificacion{
 
-        Malo,
-        Regular,
-        Bueno,
+        [Display(Name = "Excelente")]
+        Excelente,
+        [Display(Name = "Muy bueno")]
         MuyBueno,
-        Excelente
+        [Display(Name = "Bueno")]
+        Bueno,
+        [Display(Name = "Regular")]
+        Regular,
+        [Display(Name = "Malo")]
+        Malo
     }
     public class CalificacionApp{
 
@@ -17,7 +23,8 @@ namespace Dominio
 
         public ValorCalificacion ValorCalificacion{get;set;}
         public int numeroDocumentoMigrante {get;set;}
+        public DateTime Fecha {get;set;}
 
     }
 
-} 
+}

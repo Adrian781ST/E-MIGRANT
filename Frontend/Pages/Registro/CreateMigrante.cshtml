@@ -5,113 +5,135 @@
 
 @model Frontend.Pages.Registro.CreateMigranteModel
 @{
-    ViewData["Title"] = "Registrar Datos";
+    ViewData["Title"] = "Registrar Datos del Migrante";
 }
 
-
-<div class="row justify-content-center bg-light">
-    <div class="col-sm-12">
-        <h3>Registra tus Datos</h3>
-    </div>
-</div>
-<div class="row">
-    <div class="col-sm-12">
-        <p class="text-warning">@ViewData["Mensaje"]</p>
-    </div>
-</div>
-<div class="form-horizontal">
-    <div class="row">
-        <div class="col-sm-10">
-            <form method="post">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group row">
-                    <label asp-for="_migrante.Nombre" class="col-sm-2 control-label"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="_migrante.Nombre" class="form-control" />
-                        <span asp-validation-for="_migrante.Nombre" class="text-danger"></span>
-                    </div>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <i class="fas fa-user-plus text-primary" style="font-size: 4rem;"></i>
+                    <h2 class="mt-3 fw-bold">@ViewData["Title"]</h2>
+                    <p class="text-muted">Completa tu información personal</p>
                 </div>
-                <div class="form-group row">
-                    <label asp-for="_migrante.Apellidos" class="col-sm-2 control-label"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="_migrante.Apellidos" class="form-control" />
-                        <span asp-validation-for="_migrante.Apellidos" class="text-danger"></span>
+                
+                @if (!string.IsNullOrEmpty(ViewData["Mensaje"] as string))
+                {
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-2"></i>@ViewData["Mensaje"]
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label asp-for="_migrante.Tipo_Documento" class="col-sm-2 control-label"> </label>
-                    <div class="col-sm-10">
-                        <select asp-for="_migrante.Tipo_Documento" class="form-control" asp-items="@Model._tipoDoc">
-                            <option value="">Seleccionar Tipo de Documento</option>
+                }
+                
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="_migrante.Nombre" class="form-control" placeholder="Nombre" />
+                                <label asp-for="_migrante.Nombre"><i class="fas fa-user me-2"></i>Nombre</label>
+                                <span asp-validation-for="_migrante.Nombre" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="_migrante.Apellidos" class="form-control" placeholder="Apellidos" />
+                                <label asp-for="_migrante.Apellidos"><i class="fas fa-user me-2"></i>Apellidos</label>
+                                <span asp-validation-for="_migrante.Apellidos" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <select asp-for="_migrante.Tipo_Documento" class="form-select" asp-items="@Model._tipoDoc">
+                                    <option value="">Seleccionar Tipo de Documento</option>
+                                </select>
+                                <label asp-for="_migrante.Tipo_Documento"><i class="fas fa-id-card me-2"></i>Tipo de Documento</label>
+                                <span asp-validation-for="_migrante.Tipo_Documento" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="_migrante.Documento" class="form-control" placeholder="Documento" />
+                                <label asp-for="_migrante.Documento"><i class="fas fa-passport me-2"></i>Número de Documento</label>
+                                <span asp-validation-for="_migrante.Documento" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <select asp-for="_migrante.Pais" class="form-select" asp-items="@Model._listaPais">
+                                    <option value="">Seleccionar País de Origen</option>
+                                </select>
+                                <label asp-for="_migrante.Pais"><i class="fas fa-globe me-2"></i>País de Origen</label>
+                                <span asp-validation-for="_migrante.Pais" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="_migrante.FechaNacimiento" class="form-control" type="date" />
+                                <label asp-for="_migrante.FechaNacimiento"><i class="fas fa-calendar me-2"></i>Fecha de Nacimiento</label>
+                                <span asp-validation-for="_migrante.FechaNacimiento" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="_migrante.Direccion_Electronica" class="form-control" placeholder="Correo" />
+                                <label asp-for="_migrante.Direccion_Electronica"><i class="fas fa-envelope me-2"></i>Correo Electrónico</label>
+                                <span asp-validation-for="_migrante.Direccion_Electronica" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="_migrante.Telefono" class="form-control" placeholder="Teléfono" />
+                                <label asp-for="_migrante.Telefono"><i class="fas fa-phone me-2"></i>Teléfono</label>
+                                <span asp-validation-for="_migrante.Telefono" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="_migrante.Dir_Actual" class="form-control" placeholder="Dirección" />
+                                <label asp-for="_migrante.Dir_Actual"><i class="fas fa-map-marker-alt me-2"></i>Dirección Actual</label>
+                                <span asp-validation-for="_migrante.Dir_Actual" class="text-danger small"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input asp-for="_migrante.Ciudad" class="form-control" placeholder="Ciudad" />
+                                <label asp-for="_migrante.Ciudad"><i class="fas fa-city me-2"></i>Ciudad</label>
+                                <span asp-validation-for="_migrante.Ciudad" class="text-danger small"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-floating mb-4">
+                        <select asp-for="_migrante.SituacionLab" class="form-select" asp-items="@Model._listaLab">
+                            <option value="">Seleccionar Situación Laboral</option>
                         </select>
-                        <span asp-validation-for="_migrante.Tipo_Documento" class="text-danger"></span>
+                        <label asp-for="_migrante.SituacionLab"><i class="fas fa-briefcase me-2"></i>Situación Laboral</label>
+                        <span asp-validation-for="_migrante.SituacionLab" class="text-danger small"></span>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label asp-for="_migrante.Documento" class="col-sm-2 control-label"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="_migrante.Documento" class="form-control" />
-                        <span asp-validation-for="_migrante.Documento" class="text-danger"></span>
+                    
+                    <input type="hidden" asp-for="_migrante.userName" value="@User.Identity.Name" />
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-save me-2"></i>Guardar Información
+                        </button>
                     </div>
-                </div>
-                <div class="form-group row">
-                    <label asp-for="_migrante.Pais" class="col-sm-2 control-label"> </label>
-                    <div class="col-sm-10">
-                        <select asp-for="_migrante.Pais" class="form-control" asp-items="@Model._listaPais">
-                            <option value="">Seleccionar El Pais de Origen</option>
-                        </select>
-                        <span asp-validation-for="_migrante.Pais" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label asp-for="_migrante.FechaNacimiento" class="col-sm-2 control-label">Fecha de Nacimiento</label>
-                    <div class="col-sm-10">
-                        <input asp-for="_migrante.FechaNacimiento" class="form-control" type="date" />
-                        <span asp-validation-for="_migrante.FechaNacimiento" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label asp-for="_migrante.Direccion_Electronica" class="col-sm-2 control-label"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="_migrante.Direccion_Electronica" class="form-control" />
-                        <span asp-validation-for="_migrante.Direccion_Electronica" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label asp-for="_migrante.Telefono" class="col-sm-2 control-label"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="_migrante.Telefono" class="form-control" />
-                        <span asp-validation-for="_migrante.Telefono" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label asp-for="_migrante.Dir_Actual" class="col-sm-2 control-label"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="_migrante.Dir_Actual" class="form-control" />
-                        <span asp-validation-for="_migrante.Dir_Actual" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label asp-for="_migrante.Ciudad" class="col-sm-2 control-label"></label>
-                    <div class="col-sm-10">
-                        <input asp-for="_migrante.Ciudad" class="form-control" />
-                        <span asp-validation-for="_migrante.Ciudad" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label asp-for="_migrante.SituacionLab" class="col-sm-2 control-label">Situacion Laboral</label>
-                    <div class="col-sm-10">
-                        <select asp-for="_migrante.SituacionLab" class="form-control" asp-items="@Model._listaLab">
-                            <option value="">Seleccionar su Situacion Laboral</option>
-                        </select>
-                        <span asp-validation-for="_migrante.SituacionLab" class="text-danger"></span>
-                    </div>
-                </div>
-                <input type="hidden" asp-for="_migrante.userName" value="@User.Identity.Name"/>
-                <div class="form-group">
-                    <input type="submit" value="Crear" class="btn btn-secondary" />
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -119,5 +141,5 @@
 @section Scripts{
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
+    }
 }

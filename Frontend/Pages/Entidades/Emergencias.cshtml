@@ -1,0 +1,130 @@
+@page
+@attribute [Authorize(Roles = "Entidad")]
+@model Frontend.Pages.Entidades.EmergenciasModel
+@{
+    ViewData["Title"] = "Gestionar Emergencias";
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-12">
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    <i class="fas fa-exclamation-triangle text-danger" style="font-size: 4rem;"></i>
+                    <h2 class="mt-3 fw-bold">@ViewData["Title"]</h2>
+                    <p class="text-muted">Emergencias reportadas por migrantes</p>
+                </div>
+                
+                <div class="text-start mb-3">
+                    <a asp-page="Index" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Volver al Panel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-12">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h4 class="mb-4 fw-bold">
+                    <i class="fas fa-list me-2"></i>Emergencias Pendientes
+                </h4>
+                
+                @if (Model._ListarEmergencias is not null && Model._ListarEmergencias.Any())
+                {
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th><i class="fas fa-id-badge me-1"></i>ID</th>
+                                    <th><i class="fas fa-code me-1"></i>Código</th>
+                                    <th><i class="fas fa-align-left me-1"></i>Descripción</th>
+                                    <th><i class="fas fa-user me-1"></i>Migrante ID</th>
+                                    <th><i class="fas fa-info-circle me-1"></i>Estado</th>
+                                    <th><i class="fas fa-cogs me-1"></i>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var eme in Model._ListarEmergencias)
+                                {
+                                    @if(eme.Status?.ToString()?.ToUpper() == "PENDIENTE")
+                                    {
+                                        <tr>
+                                            <td><strong>@eme.Id</strong></td>
+                                            <td><span class="badge bg-primary">@eme.Codigo</span></td>
+                                            <td>@eme.Descripcion</td>
+                                            <td>@eme.MigranteId</td>
+                                            <td>
+                                                <span class="badge bg-warning text-dark">Pendiente</span>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-outline-success btn-sm me-2" asp-page="AtenderEmergencia" asp-route-emeId="@eme.Id">
+                                                    <i class="fas fa-check me-1"></i>Atender
+                                                </a>
+                                                <a class="btn btn-outline-danger btn-sm" asp-page="EliminarEmergencia" asp-route-emeId="@eme.Id">
+                                                    <i class="fas fa-times me-1"></i>Cancelar
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h4 class="mb-4 fw-bold mt-5">
+                        <i class="fas fa-check-circle me-2"></i>Historial de Emergencias
+                    </h4>
+                    
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th><i class="fas fa-id-badge me-1"></i>ID</th>
+                                    <th><i class="fas fa-code me-1"></i>Código</th>
+                                    <th><i class="fas fa-align-left me-1"></i>Descripción</th>
+                                    <th><i class="fas fa-user me-1"></i>Migrante ID</th>
+                                    <th><i class="fas fa-info-circle me-1"></i>Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var eme in Model._ListarEmergencias)
+                                {
+                                    @if(eme.Status?.ToString()?.ToUpper() != "PENDIENTE")
+                                    {
+                                        <tr>
+                                            <td><strong>@eme.Id</strong></td>
+                                            <td><span class="badge bg-secondary">@eme.Codigo</span></td>
+                                            <td>@eme.Descripcion</td>
+                                            <td>@eme.MigranteId</td>
+                                            <td>
+                                                @if(eme.Status?.ToString()?.ToUpper() == "ATENDIDO" || eme.Status?.ToString()?.ToUpper() == "ATENDIDA")
+                                                {
+                                                    <span class="badge bg-success">Atendido</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger">Cancelado</span>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-5 text-muted">
+                        <i class="fas fa-clipboard-list fa-3x mb-3"></i>
+                        <p>No hay emergencias registradas</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

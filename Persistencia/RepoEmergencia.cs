@@ -40,17 +40,39 @@ namespace Persistencia
             bool actualizado = false;
             try
             {
-                 //var munEncontrado = _context.Emergencias.Find(emergencia.Id);
-                 var emeEncontrado = _context.Emergencias.FirstOrDefault(a => a.Id == emergencia.Id);
-                 if(emeEncontrado != null)
-                 {
-                    emeEncontrado.Status= emergencia.Status;
+                var emeEncontrado = _context.Emergencias.FirstOrDefault(a => a.Id == emergencia.Id);
+                if(emeEncontrado != null)
+                {
+                    // Update only the Status property
+                    emeEncontrado.Status = emergencia.Status;
                     _context.SaveChanges();
                     actualizado = true;
-                 }
+                }
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
+                Console.WriteLine("ERROR EDIT EMERGENCIA: " + ex.Message);
+                return actualizado;
+            }
+            return actualizado;
+        }
+
+        bool IEmergencia.UpdateStatus(int id, string newStatus)
+        {
+            bool actualizado = false;
+            try
+            {
+                var emeEncontrado = _context.Emergencias.FirstOrDefault(a => a.Id == id);
+                if(emeEncontrado != null)
+                {
+                    emeEncontrado.Status = newStatus;
+                    _context.SaveChanges();
+                    actualizado = true;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine("ERROR UPDATE STATUS: " + ex.Message);
                 return actualizado;
             }
             return actualizado;
@@ -64,6 +86,12 @@ namespace Persistencia
         Emergencia IEmergencia.ReadById(int id, string user_id)
         {
             var emergencia = _context.Emergencias.FirstOrDefault(d => d.Id == id && d.MigranteId == user_id);
+            return emergencia;
+        }
+
+        Emergencia IEmergencia.ReadByIdOnly(int id)
+        {
+            var emergencia = _context.Emergencias.FirstOrDefault(d => d.Id == id);
             return emergencia;
         }
 

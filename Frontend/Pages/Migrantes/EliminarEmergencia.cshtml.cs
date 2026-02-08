@@ -23,7 +23,6 @@ namespace Frontend.Pages.Migrantes
             if(_emergencia is null){
                 ViewData["Existe"] = "La emergencia no existe por favor validar";
             }
-            // ViewData["Titulo"] = _emergencia.Descripcion;
             return Page();
         }
 
@@ -35,18 +34,18 @@ namespace Frontend.Pages.Migrantes
             else if(_emergencia.Status != "PENDIENTE"){
                 ViewData["Mensaje"] = "El estado de tu emergencia no puede modificarse";
             }else if(ModelState.IsValid){
-                _emergencia.Status = "CANCELADA";
+                _emergencia.Status = "CANCELADO";
                 bool _actualizado = _repoEmergencia.EditEmergencia(_emergencia);
                 if(_actualizado)
                 {
-                    ViewData["mensajeCreado"] = "La emergencia " + _emergencia.Descripcion + " ha sido cancelada!";
+                    // Redirect to Emergencias page instead of showing modal
+                    return RedirectToPage("Emergencias");
                 }
                 else{
                     ViewData["Mensaje"] = "Hubo un problema";
                 }
-                // return Page();
+                return Page();
             }
-            // return RedirectToPage("./Emergencias");
             return Page();
         }
     }

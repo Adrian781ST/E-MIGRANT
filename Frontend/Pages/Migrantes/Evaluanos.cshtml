@@ -1,24 +1,77 @@
 ﻿@page
+@attribute [Authorize(Roles = "Migrante")]
 @model Frontend.EvaluanosModel
 @using Dominio;
 @{
+    ViewData["Title"] = "Evaluar Aplicación";
 }
-<h1> Evalua la App E-Migrant</h1>
 
-
-<form method="post" class="scroll">
-    <div class="form-group">
-        <label asp-for="CalificacionApp.ValorCalificacion"> Valor de la calificacion</label>
-        <select asp-for="CalificacionApp.ValorCalificacion" asp-items="Html.GetEnumSelectList<ValorCalificacion>()" class="form-control" required="required" ></select> 
-
+@if (Model.Submitted)
+{
+    <div class="modal fade show d-block" tabindex="-1" role="dialog" style="background-color: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-check-circle me-2"></i>¡Gracias por tu evaluación!
+                    </h5>
+                </div>
+                <div class="modal-body text-center py-5">
+                    <i class="fas fa-heart text-danger" style="font-size: 4rem;"></i>
+                    <p class="mt-3 mb-0">Gracias por tus comentarios, son muy valiosos</p>
+                    <p class="text-muted">y de gran ayuda para este proyecto.</p>
+                </div>
+                <div class="modal-footer">
+                    <a asp-page="/Migrantes/Index" class="btn btn-primary">
+                        <i class="fas fa-home me-2"></i>Volver al Inicio
+                    </a>
+                    <button type="button" class="btn btn-outline-primary" onclick="location.reload()">
+                        <i class="fas fa-star me-2"></i>Evaluar de Nuevo
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
+}
 
-    <div class="form-group">
-        <label asp-for="CalificacionApp.numeroDocumentoMigrante"> Numero Documento</label>
-        <input asp-for="CalificacionApp.numeroDocumentoMigrante" class="form-control" required ="required">
+<div class="row justify-content-center">
+    <div class="col-lg-6">
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <i class="fas fa-star text-warning" style="font-size: 4rem;"></i>
+                    <h2 class="mt-3 fw-bold">@ViewData["Title"]</h2>
+                    <p class="text-muted">Tu opinión nos ayuda a mejorar</p>
+                </div>
+                
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                    
+                    <div class="form-floating mb-3">
+                        <select asp-for="CalificacionApp.ValorCalificacion" asp-items="Html.GetEnumSelectList<ValorCalificacion>()" class="form-select" required="required">
+                            <option value="">Seleccionar Calificación</option>
+                        </select>
+                        <label asp-for="CalificacionApp.ValorCalificacion">
+                            <i class="fas fa-star me-2"></i>Valor de la Calificación
+                        </label>
+                        <span asp-validation-for="CalificacionApp.ValorCalificacion" class="text-danger small"></span>
+                    </div>
+
+                    <div class="form-floating mb-4">
+                        <input asp-for="CalificacionApp.numeroDocumentoMigrante" class="form-control" placeholder="Número de Documento" required="required">
+                        <label asp-for="CalificacionApp.numeroDocumentoMigrante">
+                            <i class="fas fa-id-card me-2"></i>Número de Documento
+                        </label>
+                        <span asp-validation-for="CalificacionApp.numeroDocumentoMigrante" class="text-danger small"></span>
+                    </div>
+
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-warning btn-lg">
+                            <i class="fas fa-paper-plane me-2"></i>Enviar Evaluación
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
-    <button type="submit" class="btn btn-primary">Registrar Evaluacion</button>
-
-
-</form> 
+</div>

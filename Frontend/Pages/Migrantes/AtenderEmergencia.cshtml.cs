@@ -23,7 +23,6 @@ namespace Frontend.Pages.Migrantes
             if(_emergencia is null){
                 ViewData["Existe"] = "La emergencia no existe por favor validar";
             }
-            // ViewData["Titulo"] = _emergencia.Descripcion;
             return Page();
         }
 
@@ -39,14 +38,14 @@ namespace Frontend.Pages.Migrantes
                 bool _actualizado = _repoEmergencia.EditEmergencia(_emergencia);
                 if(_actualizado)
                 {
-                    ViewData["mensajeCreado"] = "La emergencia " + _emergencia.Descripcion + " ha sido atendida!";
+                    // Redirect to Emergencias page instead of showing modal
+                    return RedirectToPage("Emergencias");
                 }
                 else{
                     ViewData["Mensaje"] = "Hubo un problema";
                 }
                 return Page();
             }
-            // return RedirectToPage("./Emergencias");
             return Page();
         }
     }

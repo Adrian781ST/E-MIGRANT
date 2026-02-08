@@ -1,14 +1,130 @@
 ﻿@page
+@attribute [Authorize(Roles = "Admin")]
 @using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> UserManager
+@inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 @model Frontend.IndexModel
 @{
+    ViewData["Title"] = "Panel Admin";
 }
-<h1> Bienvenido usuario de gerencia @User.Identity.Name</h1>
 
-<h4><a asp-page="RegistroNovedad" asp-route-userNameA="@User.Identity.Name"> Crear novedades </a></h4>
-<a class="btn btn-primary table-btn" asp-page="/Gerencia/GENovedad">
-        <i class="bi bi-file-plus" aria-hidden="true"></i>
-            Visualizar Novedades
-</a>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-body p-5">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-user-shield text-primary" style="font-size: 4rem;"></i>
+                        <h2 class="mt-3 fw-bold">Panel de Administración</h2>
+                        <p class="text-muted">Gestión integral de la plataforma</p>
+                    </div>
+                    
+                    <!-- Resumen de Emergencias -->
+                    @if (Model._ListarEmergencias is not null)
+                    {
+                        var totalEmergencias = Model._ListarEmergencias.Count;
+                        var pendientes = Model._ListarEmergencias.Count(e => e.Status?.ToString()?.ToUpper() == "PENDIENTE");
+                        var atendidas = Model._ListarEmergencias.Count(e => e.Status?.ToString()?.ToUpper() == "ATENDIDO" || e.Status?.ToString()?.ToUpper() == "ATENDIDA");
+                        var canceladas = Model._ListarEmergencias.Count(e => e.Status?.ToString()?.ToUpper() == "CANCELADO");
+                        
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-3">
+                                <div class="card bg-primary text-white h-100">
+                                    <div class="card-body text-center py-4">
+                                        <i class="fas fa-exclamation-triangle fa-2x mb-2"></i>
+                                        <h5 class="card-title">Total</h5>
+                                        <h3>@totalEmergencias</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-warning text-dark h-100">
+                                    <div class="card-body text-center py-4">
+                                        <i class="fas fa-clock fa-2x mb-2"></i>
+                                        <h5 class="card-title">Pendientes</h5>
+                                        <h3>@pendientes</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-success text-white h-100">
+                                    <div class="card-body text-center py-4">
+                                        <i class="fas fa-check-circle fa-2x mb-2"></i>
+                                        <h5 class="card-title">Atendidas</h5>
+                                        <h3>@atendidas</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="card bg-danger text-white h-100">
+                                    <div class="card-body text-center py-4">
+                                        <i class="fas fa-times-circle fa-2x mb-2"></i>
+                                        <h5 class="card-title">Canceladas</h5>
+                                        <h3>@canceladas</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <a asp-page="EmergenciasAdmin" class="card h-100 text-decoration-none border-danger">
+                                <div class="card-body text-center py-4">
+                                    <i class="fas fa-exclamation-triangle text-danger mb-3" style="font-size: 2.5rem;"></i>
+                                    <h5 class="card-title text-dark">Emergencias</h5>
+                                    <p class="card-text text-muted small">Ver y gestionar todas las emergencias</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-page="EvaluacionesAdmin" class="card h-100 text-decoration-none border-warning">
+                                <div class="card-body text-center py-4">
+                                    <i class="fas fa-star text-warning mb-3" style="font-size: 2.5rem;"></i>
+                                    <h5 class="card-title text-dark">Evaluaciones</h5>
+                                    <p class="card-text text-muted small">Ver todas las calificaciones</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-page="GENovedad" class="card h-100 text-decoration-none border-info">
+                                <div class="card-body text-center py-4">
+                                    <i class="fas fa-newspaper text-info mb-3" style="font-size: 2.5rem;"></i>
+                                    <h5 class="card-title text-dark">Novedades</h5>
+                                    <p class="card-text text-muted small">Gestionar novedades</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-page="RegistroNovedad" class="card h-100 text-decoration-none border-success">
+                                <div class="card-body text-center py-4">
+                                    <i class="fas fa-plus-circle text-success mb-3" style="font-size: 2.5rem;"></i>
+                                    <h5 class="card-title text-dark">Crear Novedad</h5>
+                                    <p class="card-text text-muted small">Registrar nuevas novedades</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-page="UsuariosAdmin" class="card h-100 text-decoration-none border-secondary">
+                                <div class="card-body text-center py-4">
+                                    <i class="fas fa-users text-secondary mb-3" style="font-size: 2.5rem;"></i>
+                                    <h5 class="card-title text-dark">Usuarios</h5>
+                                    <p class="card-text text-muted small">Gestionar usuarios</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-md-4">
+                            <a asp-page="ReportesAdmin" class="card h-100 text-decoration-none border-dark">
+                                <div class="card-body text-center py-4">
+                                    <i class="fas fa-chart-bar text-dark mb-3" style="font-size: 2.5rem;"></i>
+                                    <h5 class="card-title text-dark">Reportes</h5>
+                                    <p class="card-text text-muted small">Ver estadísticas y reportes</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,66 +1,112 @@
 ﻿@page
+@attribute [Authorize(Roles = "Migrante")]
 @model Frontend.Pages.Migrantes.EmergenciasModel
 @{
+    ViewData["Title"] = "Emergencias";
 }
 
-<div class="row justify-content-center bg-light">
-    <div class="col-sm-12">
-        <h3>Emergencias [<a href="/Migrantes">Pagina Principal</a>]
-        <br/>
-        <hr/>
-        <p>Digite el Codigo de la Emergencia</p>
-            <form method="post">
-                <input type="hidden" asp-for="_emergencia.MigranteId" value="@User.Identity.Name">
-                <input class="form-control" asp-for="_emergencia.Codigo" />
-                <span class="text-danger">@ViewData["Error"]</span>
-                <span class="text-success">@ViewData["mensajeCreado"]</span>
-                <br/>
-                <button type="submit" class="btn btn-success btn-lg">Solicitar Emergencias</button>
-            </form>
-        </h3>
-        <br/>
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm border-0 mb-4">
+            <div class="card-body p-5">
+                <div class="text-center mb-4">
+                    <i class="fas fa-exclamation-triangle text-danger" style="font-size: 4rem;"></i>
+                    <h2 class="mt-3 fw-bold">@ViewData["Title"]</h2>
+                    <p class="text-muted">Solicita atención de emergencia</p>
+                </div>
+                
+                <form method="post">
+                    <input type="hidden" asp-for="_emergencia.MigranteId" value="@User.Identity.Name">
+                    
+                    <div class="form-floating mb-4">
+                        <input asp-for="_emergencia.Codigo" class="form-control" placeholder="Código de Emergencia" />
+                        <label asp-for="_emergencia.Codigo">
+                            <i class="fas fa-key me-2"></i>Código de Emergencia
+                        </label>
+                        <span class="text-danger">@ViewData["Error"]</span>
+                        <span class="text-success">@ViewData["mensajeCreado"]</span>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            <i class="fas fa-exclamation-circle me-2"></i>Solicitar Atención
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-
 </div>
 
-@* .Count(d => d.MigranteId == User.Identity.Name) > 0 *@
-
 <div class="row justify-content-center">
-    @if (Model._ListarEmergencias is not null)
-    {
-        <table class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Codigo</td>
-                    <td>Nombre</td>
-                    <td>Estado</td>
-                    <td>Qué desea hacer?</td>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var eme in Model._ListarEmergencias)
+    <div class="col-lg-10">
+        <div class="card shadow-sm border-0">
+            <div class="card-body">
+                <h4 class="mb-4 fw-bold">
+                    <i class="fas fa-list me-2"></i>Mis Emergencias
+                </h4>
+                
+                @if (Model._ListarEmergencias is not null)
                 {
-                    @if(eme.MigranteId == User.Identity.Name)
-                    {
-                        <tr>
-                            <td>@eme.Id</td>
-                            <td>@eme.Codigo</td>
-                            <td>@eme.Descripcion</td>
-                            <td>@eme.Status</td>
-                            <td>
-                                <a class="btn btn-outline-success" asp-page="AtenderEmergencia" asp-route-emeId="@eme.Id">Marcar como Atendido</a>
-                                <a class="btn btn-outline-danger" asp-page="EliminarEmergencia" asp-route-emeId="@eme.Id">Cancelar</a>
-                            </td>
-                        </tr>
-                    }
-                    
+                    <div class="table-responsive">
+                        <table class="table table-hover align-middle">
+                            <thead class="table-light">
+                                <tr>
+                                    <th><i class="fas fa-id-badge me-1"></i>ID</th>
+                                    <th><i class="fas fa-code me-1"></i>Código</th>
+                                    <th><i class="fas fa-align-left me-1"></i>Descripción</th>
+                                    <th><i class="fas fa-info-circle me-1"></i>Estado</th>
+                                    <th><i class="fas fa-cogs me-1"></i>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var eme in Model._ListarEmergencias)
+                                {
+                                    @if(eme.MigranteId == User.Identity.Name)
+                                    {
+                                        <tr>
+                                            <td>@eme.Id</td>
+                                            <td><strong>@eme.Codigo</strong></td>
+                                            <td>@eme.Descripcion</td>
+                                            <td>
+                                                @if(eme.Status?.ToString()?.ToUpper() == "PENDIENTE")
+                                                {
+                                                    <span class="badge bg-warning text-dark">Pendiente</span>
+                                                }
+                                                else if(eme.Status?.ToString()?.ToUpper() == "ATENDIDO" || eme.Status?.ToString()?.ToUpper() == "ATENDIDA")
+                                                {
+                                                    <span class="badge bg-success">Atendida</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger">Cancelada</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @if(eme.Status?.ToString()?.ToUpper() == "PENDIENTE")
+                                                {
+                                                    <small class="text-muted">En espera de atención</small>
+                                                }
+                                                else
+                                                {
+                                                    <small class="text-muted">Emergencia finalizada</small>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 }
-            </tbody>
-        </table>
-    }
-    else
-    {
-        <p class="lead">No hay Deportistas registrados!</p>
-    }
+                else
+                {
+                    <div class="text-center py-5 text-muted">
+                        <i class="fas fa-clipboard-list fa-3x mb-3"></i>
+                        <p>No hay emergencias registradas</p>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>

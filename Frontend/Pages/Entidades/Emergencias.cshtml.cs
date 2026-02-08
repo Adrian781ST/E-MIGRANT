@@ -7,22 +7,24 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Dominio;
 using Persistencia;
 
-namespace Frontend.Pages.Gerencia
+namespace Frontend.Pages.Entidades
 {
-    public class IndexModel : PageModel
+    public class EmergenciasModel : PageModel
     {
         private readonly IEmergencia _repoEmergencia;
-        
+        [BindProperty]
+        public Emergencia _emergencia { get; set; }
         public IEnumerable<Emergencia> _ListarEmergencias { get; set; }
-        
-        public IndexModel(IEmergencia repoEmergencia)
+
+        public EmergenciasModel(IEmergencia repoEmergencia)
         {
-            _repoEmergencia = repoEmergencia;
+            this._repoEmergencia = repoEmergencia;
         }
-        
-        public void OnGet()
+
+        public ActionResult OnGet()
         {
             _ListarEmergencias = _repoEmergencia.ListarEmergencias();
+            return Page();
         }
     }
 }

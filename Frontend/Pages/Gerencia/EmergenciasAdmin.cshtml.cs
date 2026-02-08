@@ -9,20 +9,20 @@ using Persistencia;
 
 namespace Frontend.Pages.Gerencia
 {
-    public class IndexModel : PageModel
+    public class EmergenciasAdminModel : PageModel
     {
         private readonly IEmergencia _repoEmergencia;
-        
         public IEnumerable<Emergencia> _ListarEmergencias { get; set; }
-        
-        public IndexModel(IEmergencia repoEmergencia)
+
+        public EmergenciasAdminModel(IEmergencia repoEmergencia)
         {
-            _repoEmergencia = repoEmergencia;
+            this._repoEmergencia = repoEmergencia;
         }
-        
-        public void OnGet()
+
+        public ActionResult OnGet()
         {
             _ListarEmergencias = _repoEmergencia.ListarEmergencias();
+            return Page();
         }
     }
 }
