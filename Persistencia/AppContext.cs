@@ -1,4 +1,6 @@
-﻿using Dominio;
+﻿using System;
+using System.IO;
+using Dominio;
 using Microsoft.EntityFrameworkCore;
 
 namespace Persistencia
@@ -17,7 +19,9 @@ namespace Persistencia
         {
             if(!optionBuilder.IsConfigured)
             {
-                optionBuilder.UseSqlite("Data Source=E-Migrant.db");
+                // Usar ruta persistente en Azure
+                var dbPath = Path.Combine(Environment.GetEnvironmentVariable("HOME") ?? ".", "E-Migrant.db");
+                optionBuilder.UseSqlite($"Data Source={dbPath}");
             }
         }
 
