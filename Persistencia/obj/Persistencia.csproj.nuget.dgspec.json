@@ -1,32 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Adrian\\Desktop\\e-migrant-grupo28_trex-E\\Persistencia\\Persistencia.csproj": {}
+    "c:\\Users\\USER\\Documents\\e-migrant-grupo28_trex\\Persistencia\\Persistencia.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Adrian\\Desktop\\e-migrant-grupo28_trex-E\\Dominio\\Dominio.csproj": {
+    "c:\\Users\\USER\\Documents\\e-migrant-grupo28_trex\\Dominio\\Dominio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Adrian\\Desktop\\e-migrant-grupo28_trex-E\\Dominio\\Dominio.csproj",
+        "projectUniqueName": "c:\\Users\\USER\\Documents\\e-migrant-grupo28_trex\\Dominio\\Dominio.csproj",
         "projectName": "Dominio",
-        "projectPath": "C:\\Users\\Adrian\\Desktop\\e-migrant-grupo28_trex-E\\Dominio\\Dominio.csproj",
-        "packagesPath": "C:\\Users\\Adrian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Adrian\\Desktop\\e-migrant-grupo28_trex-E\\Dominio\\obj\\",
+        "projectPath": "c:\\Users\\USER\\Documents\\e-migrant-grupo28_trex\\Dominio\\Dominio.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\USER\\Documents\\e-migrant-grupo28_trex\\Dominio\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Adrian\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -34,18 +32,24 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "imports": [
             "net461",
             "net462",
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -54,36 +58,34 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Adrian\\Desktop\\e-migrant-grupo28_trex-E\\Persistencia\\Persistencia.csproj": {
+    "c:\\Users\\USER\\Documents\\e-migrant-grupo28_trex\\Persistencia\\Persistencia.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Adrian\\Desktop\\e-migrant-grupo28_trex-E\\Persistencia\\Persistencia.csproj",
+        "projectUniqueName": "c:\\Users\\USER\\Documents\\e-migrant-grupo28_trex\\Persistencia\\Persistencia.csproj",
         "projectName": "Persistencia",
-        "projectPath": "C:\\Users\\Adrian\\Desktop\\e-migrant-grupo28_trex-E\\Persistencia\\Persistencia.csproj",
-        "packagesPath": "C:\\Users\\Adrian\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Adrian\\Desktop\\e-migrant-grupo28_trex-E\\Persistencia\\obj\\",
+        "projectPath": "c:\\Users\\USER\\Documents\\e-migrant-grupo28_trex\\Persistencia\\Persistencia.csproj",
+        "packagesPath": "C:\\Users\\USER\\.nuget\\packages\\",
+        "outputPath": "c:\\Users\\USER\\Documents\\e-migrant-grupo28_trex\\Persistencia\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Adrian\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\USER\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Adrian\\Desktop\\e-migrant-grupo28_trex-E\\Dominio\\Dominio.csproj": {
-                "projectPath": "C:\\Users\\Adrian\\Desktop\\e-migrant-grupo28_trex-E\\Dominio\\Dominio.csproj"
+              "c:\\Users\\USER\\Documents\\e-migrant-grupo28_trex\\Dominio\\Dominio.csproj": {
+                "projectPath": "c:\\Users\\USER\\Documents\\e-migrant-grupo28_trex\\Dominio\\Dominio.csproj"
               }
             }
           }
@@ -92,31 +94,36 @@
           "warnAsError": [
             "NU1605"
           ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[8.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[8.0.0, )"
             },
-            "Microsoft.EntityFrameworkCore.SqlServer": {
+            "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[8.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[8.0.0, )"
             }
           },
           "imports": [
@@ -125,7 +132,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -134,7 +142,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.417/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

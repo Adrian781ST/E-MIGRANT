@@ -1,5 +1,5 @@
 ﻿@page
-@attribute [Authorize(Roles = "Entidad")]
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager

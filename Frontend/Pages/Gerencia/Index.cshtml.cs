@@ -12,17 +12,17 @@ namespace Frontend.Pages.Gerencia
     public class IndexModel : PageModel
     {
         private readonly IEmergencia _repoEmergencia;
-        
         public IEnumerable<Emergencia> _ListarEmergencias { get; set; }
-        
+
         public IndexModel(IEmergencia repoEmergencia)
         {
-            _repoEmergencia = repoEmergencia;
+            this._repoEmergencia = repoEmergencia;
         }
-        
-        public void OnGet()
+
+        public ActionResult OnGet()
         {
             _ListarEmergencias = _repoEmergencia.ListarEmergencias();
+            return Page();
         }
     }
 }

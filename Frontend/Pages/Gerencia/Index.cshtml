@@ -1,9 +1,9 @@
 ﻿@page
-@attribute [Authorize(Roles = "Admin")]
+@using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
-@model Frontend.IndexModel
+@model Frontend.Pages.Gerencia.IndexModel
 @{
     ViewData["Title"] = "Panel Admin";
 }
@@ -22,10 +22,11 @@
                     <!-- Resumen de Emergencias -->
                     @if (Model._ListarEmergencias is not null)
                     {
-                        var totalEmergencias = Model._ListarEmergencias.Count;
-                        var pendientes = Model._ListarEmergencias.Count(e => e.Status?.ToString()?.ToUpper() == "PENDIENTE");
-                        var atendidas = Model._ListarEmergencias.Count(e => e.Status?.ToString()?.ToUpper() == "ATENDIDO" || e.Status?.ToString()?.ToUpper() == "ATENDIDA");
-                        var canceladas = Model._ListarEmergencias.Count(e => e.Status?.ToString()?.ToUpper() == "CANCELADO");
+                        var lista = Model._ListarEmergencias.ToList();
+                        var totalEmergencias = lista.Count;
+                        var pendientes = lista.Count(e => e.Status?.ToString()?.ToUpper() == "PENDIENTE");
+                        var atendidas = lista.Count(e => e.Status?.ToString()?.ToUpper() == "ATENDIDO" || e.Status?.ToString()?.ToUpper() == "ATENDIDA");
+                        var canceladas = lista.Count(e => e.Status?.ToString()?.ToUpper() == "CANCELADO");
                         
                         <div class="row g-3 mb-4">
                             <div class="col-md-3">

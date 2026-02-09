@@ -11,5 +11,6 @@ namespace Dominio
         public String Descripcion { get; set; }
         public String MigranteId { get; set; }
         public String Status { get; set; }
+        public DateTime Fecha { get; set; }
     }
 }
